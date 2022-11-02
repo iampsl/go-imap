@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"github.com/emersion/go-imap"
+	"github.com/iampsl/go-imap"
 )
 
 // An IDLE command.

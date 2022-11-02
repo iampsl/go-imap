@@ -5,8 +5,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/emersion/go-imap/backend/memory"
-	"github.com/emersion/go-imap/server"
+	"github.com/iampsl/go-imap/backend/memory"
+	"github.com/iampsl/go-imap/server"
 )
 
 // Extnesions that are always advertised by go-imap server.

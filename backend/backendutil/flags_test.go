@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/emersion/go-imap"
+	"github.com/iampsl/go-imap"
 )
 
 var updateFlagsTests = []struct {

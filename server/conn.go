@@ -9,8 +9,8 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/backend"
+	"github.com/iampsl/go-imap"
+	"github.com/iampsl/go-imap/backend"
 )
 
 // Conn is a connection to a client.
