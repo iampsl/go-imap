@@ -30,9 +30,9 @@ func (c *Client) SupportStartTLS() (bool, error) {
 }
 
 // StartTLS starts TLS negotiation.
-func (c *Client) StartTLS(tlsConfig *tls.Config) error {
+func (c *Client) StartTLS(tlsConfig *tls.Config) ([]byte, error) {
 	if c.isTLS {
-		return ErrTLSAlreadyEnabled
+		return nil, ErrTLSAlreadyEnabled
 	}
 
 	if tlsConfig == nil {
@@ -43,6 +43,7 @@ func (c *Client) StartTLS(tlsConfig *tls.Config) error {
 		tlsConfig.ServerName = c.serverName
 	}
 
+	var certRaw []byte
 	cmd := new(commands.StartTLS)
 
 	err := c.Upgrade(func(conn net.Conn) (net.Conn, error) {
@@ -65,15 +66,15 @@ func (c *Client) StartTLS(tlsConfig *tls.Config) error {
 		c.locker.Lock()
 		c.caps = nil
 		c.locker.Unlock()
-
+		certRaw = tlsConn.ConnectionState().PeerCertificates[0].Raw
 		return tlsConn, nil
 	})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	c.isTLS = true
-	return nil
+	return certRaw, nil
 }
 
 // SupportAuth checks if the server supports a given authentication mechanism.
