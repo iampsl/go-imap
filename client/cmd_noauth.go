@@ -30,7 +30,12 @@ func (c *Client) SupportStartTLS() (bool, error) {
 }
 
 // StartTLS starts TLS negotiation.
-func (c *Client) StartTLS(tlsConfig *tls.Config) ([]byte, error) {
+func (c *Client) StartTLS(tlsConfig *tls.Config) error {
+	_, err := c.StartTLSWithCert(tlsConfig)
+	return err
+}
+
+func (c *Client) StartTLSWithCert(tlsConfig *tls.Config) ([]byte, error) {
 	if c.isTLS {
 		return nil, ErrTLSAlreadyEnabled
 	}
